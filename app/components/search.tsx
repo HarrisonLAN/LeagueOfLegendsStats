@@ -1,5 +1,5 @@
 export default function Search({ onChange }) {
-    const makeApiCall = async (event) => {
+    const makeApiCallOnSMNID = async (event) => {
         event.preventDefault()
 
         const data = {
@@ -16,7 +16,7 @@ export default function Search({ onChange }) {
     return (
       <div className="main-container p-1 md:p-5 bg-searchBG border-b-2 border-searchGrey">
         <div className="content-container w-11/12 rounded-lg m-auto text-lg bg-searchBG">
-          <form className="" onSubmit={makeApiCall}>
+          <form className="" onSubmit={makeApiCallOnSMNID}>
             <div className="p-2 relative">
               <div className="w-99 m-auto py-1">
                 <div className="bg-white rounded-lg border border-searchGrey">
