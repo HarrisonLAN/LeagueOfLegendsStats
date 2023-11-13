@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
 
     try {
-        const response = await fetch('https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/' + body.summonerID + '/ids?start=0&count=10', {
+        const response = await fetch('https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/' + body.summonerID + '/ids?start=0&count=25', {
             method: 'GET', // or 'POST', 'PUT', etc.
             headers: headers,
             // Other options like body, credentials, etc. can be added here

@@ -10,12 +10,12 @@ import MatchHistory from './components/matchHistory';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [summoner, setSummoner] = useState();
-  const [matchHistory, setMatchHistory] = useState();
+
 
   return (  
     <Layout {...pageProps}>
       <Search onChange={setSummoner} />
-      <SummonerDetails onChange={setMatchHistory} data={summoner} />
+      <SummonerDetails data={summoner} />
     </Layout>
   )
 }

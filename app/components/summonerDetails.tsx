@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import MatchHistory from "./matchHistory";
 
 export default function SummonerDetails(summoner) {
     const [matchHistory, setMatchHistory] = useState();
@@ -10,7 +11,8 @@ export default function SummonerDetails(summoner) {
         const JSONdata = JSON.stringify(data)
         const matchHistory = await fetch('/api/getMatchs', { method: 'POST', body: JSONdata })
         if (matchHistory.status === 200) {
-            console.log(await matchHistory.json())
+            const matchList = await matchHistory.json();
+            setMatchHistory(matchList)
         }
     }
 
@@ -38,6 +40,9 @@ export default function SummonerDetails(summoner) {
                     <div className="lg:flex">
 
                         <ul className="lg:w-1/2 w-99 p-1">
+                            {matchHistory?.map((match) => (
+                                <MatchHistory data={match} key={match} />
+                            ))}
                         </ul>
 
                     </div>
