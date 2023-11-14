@@ -1,8 +1,8 @@
 import { useState, useEffect, useMemo } from "react";
 export default function MatchHistory(matchID) {
+    let counter = 1
     const [loaded, setLoaded] = useState(false);
     const [match, setMatch] = useState();
-
 
     const makeApiCallOnMatchID = async () => {
         const data = {
@@ -12,14 +12,15 @@ export default function MatchHistory(matchID) {
         const matchRes = await fetch('/api/getMatch', { method: 'POST', body: JSONdata })
         if (matchRes.status === 200) {
             const match = await matchRes.json();
-            console.log(match)
             setMatch(match)
         }
     }
 
     if (!loaded) {
+        if(match === undefined){
+            makeApiCallOnMatchID();
+        }
         setLoaded(true);
-        makeApiCallOnMatchID();
     }
     const data = match === undefined
     

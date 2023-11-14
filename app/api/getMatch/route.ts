@@ -16,8 +16,19 @@ export async function POST(req: NextRequest) {
             // Other options like body, credentials, etc. can be added here
 
         });
-        const match = await response.json();
-        return new NextResponse(JSON.stringify(match))
+
+
+
+        if(response.status === 200){
+            const match = await response.json();
+            return new NextResponse(JSON.stringify(match))
+        }
+        if(response.status === 403){
+            return NextResponse.json({ error: '403 Forbidden response status code' }, { status: 403 })
+        }else{
+            return NextResponse.json({ error: response.type }, { status: response.status })
+        }
+
     } catch (error) {
         console.error('Fetch error:', error);
     }

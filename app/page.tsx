@@ -19,10 +19,12 @@ export default function App({ Component, pageProps }: AppProps) {
   const [summoner, setSummoner] = useState();
 
 
-  return (  
+  return (
     <Layout {...pageProps}>
-      <Search onChange={setSummoner} />
-      <SummonerDetails data={summoner} />
+      <QueryClientProvider client={queryClient}>
+        <Search onChange={setSummoner} />
+        <SummonerDetails data={summoner} />
+      </QueryClientProvider>
     </Layout>
   )
 }
