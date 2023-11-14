@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
-export default function MatchHistory(matchID) {
+export default function MatchList(matchID) {
+    const [loaded, setLoaded] = useState(false);
     const [match, setMatch] = useState();
 
 
@@ -12,12 +13,27 @@ export default function MatchHistory(matchID) {
         if (matchRes.status === 200) {
             const match = await matchRes.json();
             setMatch(match)
-            console.log(match)
         }
     }
-    makeApiCallOnMatchID();
+
+    if (!loaded) {
+        setLoaded(true);
+        makeApiCallOnMatchID();
+    }
+    const data = match === undefined
     return (
         <>
+            {data ? (
+
+                <> </>
+            ) : (
+                <>
+                    <div className="py-2 w-11/12 m-auto">
+                        <h1>{match.info.gameId}</h1>
+                    </div>
+                </>
+            )}
+
         </>
     );
 }

@@ -4,9 +4,16 @@ import Search from './components/search'
 import SummonerDetails from './components/summonerDetails'
 import { useState, useEffect } from 'react';
 
-import Layout from './layout';
-import MatchHistory from './components/matchHistory';
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query'
 
+// Create a client
+const queryClient = new QueryClient()
+
+import Layout from './layout';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [summoner, setSummoner] = useState();

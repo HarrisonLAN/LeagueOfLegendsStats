@@ -17,7 +17,6 @@ export async function POST(req: NextRequest) {
 
         });
         const match = await response.json();
-        console.log(match)
         return new NextResponse(JSON.stringify(match))
     } catch (error) {
         console.error('Fetch error:', error);
