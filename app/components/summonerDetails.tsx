@@ -51,7 +51,7 @@ export default function SummonerDetails(summoner) {
 
                     <div className="lg:flex">
                         <ul className="lg:w-1/2 w-99 p-1">
-                            {matches?.map((match) => (
+                             {matches?.map((match) => (
                                 <Match data={match} key={match} />
                             ))}
                         </ul>

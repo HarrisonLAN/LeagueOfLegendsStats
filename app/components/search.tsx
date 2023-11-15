@@ -1,21 +1,32 @@
-
-    import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query'
     export default function Search({ onChange }) {
+      const [summonerId, setSummonerId] = useState(undefined);
       const makeApiCallOnSMNID = async (event) => {
         event.preventDefault()
-
-        const data = {
-          summonerID: event.target.summonerID.value,
+        setSummonerId(event.target.summonerID.value)
+        if(summonerId === event.target.summonerID.value){
+          refetch();
         }
-        const JSONdata = JSON.stringify(data)
-        const summoner = await fetch('/api/getSummonerID', { method: 'POST', body: JSONdata })
-
-        if (summoner.status === 200) {
-          const summonerID = await summoner.json();
-            onChange(summonerID)
-            }
-
-
+      }
+      const { refetch,isPending, error, data ,isSuccess,status} = useQuery({
+        queryKey: ['repoData'],
+        enabled: summonerId != undefined,
+        queryFn: () =>
+          fetch('/api/getSummonerID', { method: 'POST', body: JSON.stringify( {summonerID: summonerId}) 
+        }).then(
+            (res) => res.json(),
+          ),
+      })
+      if(isSuccess){
+        if(data.error){
+        }else if(data?.name !== "Undefined"){
+          onChange(data)
+        }
       }
       return (
         <div className="main-container p-1 md:p-5 bg-searchBG border-b-2 border-searchGrey">
